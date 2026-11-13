@@ -561,12 +561,169 @@
                 color: #0891b2;
             }
         }
+        /* Navbar */
+        .navbar-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 0.95em;
+            padding: 16px 0;
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            padding: 16px 0;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li a {
+            display: block;
+            padding: 16px 18px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .navbar ul li a:hover {
+            background: rgba(255,255,255,0.15);
+            color: #ffd700;
+        }
+
+        .navbar ul li a.active {
+            background: rgba(255,255,255,0.2);
+            color: #ffd700;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand { display: block; }
+            .hamburger { display: flex; }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                flex-wrap: wrap;
+                border-top: 1px solid rgba(255,255,255,0.15);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+                z-index: 999;
+            }
+
+            .navbar ul.open { display: flex; }
+
+            .navbar ul li { width: 100%; }
+
+            .navbar ul li a {
+                padding: 14px 24px;
+                font-size: 0.95em;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+                white-space: normal;
+            }
+
+            .navbar ul li a:hover {
+                background: rgba(255,255,255,0.12);
+                padding-left: 32px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar-wrapper">
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <span class="navbar-brand">Dr. Saddam Hussain</span>
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <ul id="nav-menu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#memberships">Memberships</a></li>
+            <li><a href="#books">Books</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navMenu.classList.toggle('open');
+        });
+        // Close menu when a link is clicked
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navMenu.classList.remove('open');
+            });
+        });
+    </script>
+
     <div class="container">
         <!-- Header Section -->
-        <div class="header">
+        <div class="header" id="about">
             <div class="hero-content">
                 <img src="2FE2A2BB-7C60-4362-A6F9-C9A18302B524.PNG" alt="Dr. Saddam Hussain" class="profile-image">
                 <div class="hero-text">
@@ -636,7 +793,7 @@
             </section>
 
             <!-- Areas of Expertise -->
-            <section class="section">
+            <section class="section" id="expertise">
                 <h2 class="section-title">Areas of Expertise</h2>
                 <div class="skills-grid">
                     <div class="skill-card">Finance Management</div>
@@ -649,7 +806,7 @@
             </section>
 
             <!-- Work Experience -->
-            <section class="section">
+            <section class="section" id="experience">
                 <h2 class="section-title">Work Experience</h2>
                 <div class="experience-item">
                     <strong>CFO & HR Head</strong> at Minds NXT Techno Vision Pvt. Ltd.<br>
@@ -702,7 +859,7 @@
             </section>
 
             <!-- Education & Qualifications -->
-            <section class="section">
+            <section class="section" id="education">
                 <h2 class="section-title">Education & Qualifications</h2>
                 <table class="qualification-table">
                     <thead>
@@ -883,7 +1040,7 @@
             </section>
 
             <!-- Published Books -->
-            <section class="section">
+            <section class="section" id="books">
                 <h2 class="section-title">Published Books</h2>
                 <div class="courses-grid">
                     <a href="https://www.amazon.in/dp/B0HBKBT8GL" target="_blank" style="text-decoration: none;">
@@ -926,7 +1083,7 @@
             </section>
 
             <!-- Published Papers -->
-            <section class="section">
+            <section class="section" id="publications">
                 <h2 class="section-title">Published Papers</h2>
                 <div class="courses-grid">
                     <a href="https://www.jjtujournals.com/Home/Rex" target="_blank" style="text-decoration: none;">
@@ -1354,7 +1511,7 @@
 
 
             <!-- Professional Courses -->
-            <section class="section">
+            <section class="section" id="certifications">
                 <h2 class="section-title">Professional Certifications</h2>
                 
                 <h3 style="color: #667eea; margin-top: 25px; margin-bottom: 15px; font-size: 1.2em;">European Institute of Leadership & Management (Dublin, IRELAND)</h3>
@@ -1429,7 +1586,7 @@
             </section>
 
             <!-- Professional Memberships -->
-            <section class="section">
+            <section class="section" id="memberships">
                 <h2 class="section-title">Professional Memberships</h2>
                 
                 <h3 style="color: #667eea; margin-bottom: 15px; font-size: 1.1em;">Advocate Membership</h3>
@@ -1476,7 +1633,7 @@
             </section>
 
             <!-- Contact Section -->
-            <section class="section">
+            <section class="section" id="contact">
                 <!-- <h2 class="section-title">Get In Touch</h2>
                 
                 <div class="contact-form">
